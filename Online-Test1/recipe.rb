@@ -44,7 +44,8 @@ class Recipe
       raise 'Unrecognized recipe'
     end
 
-    @ingredients = builder.product.ingredients
-    @method_steps = builder.product.method_steps
+    product = builder.product
+    @ingredients = product.ingredients
+    @method_steps = product.method_steps
   end
 end

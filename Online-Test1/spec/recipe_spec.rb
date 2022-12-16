@@ -46,4 +46,8 @@ describe Recipe do
     expect(instant_noodle_recipe.ingredients).to eq ['Indomie']
     expect(instant_noodle_recipe.method_steps).to eq ['Heat the water to a boil', 'Put noodles into boiling water', 'Add seasoning']
   end
+
+  it 'Unrecognized recipe' do
+    expect { Recipe.for('Burger') }.to raise_error(RuntimeError, 'Unrecognized recipe')
+  end
 end
