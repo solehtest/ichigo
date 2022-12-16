@@ -1,4 +1,4 @@
 require_relative 'dish'
 
-class Pancake < Dish
+class InstantNoodle < Dish
 end

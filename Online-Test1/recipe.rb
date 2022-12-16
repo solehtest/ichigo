@@ -1,14 +1,17 @@
+require_relative 'director'
 require_relative 'pancake_builder'
 require_relative 'miso_soup_builder'
+require_relative 'instant_noodle_builder'
 
 class Recipe
   # YOUR CODE HERE
-  attr_reader :name
+  attr_reader :name, :ingredients, :method_steps
 
   class << self
     def clear
       @name = nil
-      @product = nil
+      @ingredients = nil
+      @method_steps = nil
     end
 
     # set recipe name
@@ -19,28 +22,29 @@ class Recipe
 
   def initialize(name=nil)
     @name = name
-    @product = get_product
+    build_product
   end
 
-  # get dish recipe
-  def get_product
+  # build product
+  def build_product
     case @name
     when 'Pancake'
-      PancakeBuilder.new
+      builder = PancakeBuilder.new
+      director = Director.new(builder)
+      director.make_pancake
     when 'Miso Soup'
-      MisoSoupBuilder.new
+      builder = MisoSoupBuilder.new
+      director = Director.new(builder)
+      director.make_miso_soup
+    when 'Instant Noodle'
+      builder = InstantNoodleBuilder.new
+      director = Director.new(builder)
+      director.make_instant_noodle
     else
       raise 'Unrecognized recipe'
     end
-  end
 
-  # get product ingredients
-  def ingredients
-    @product.ingredients
-  end
-
-  # get dish preparation steps
-  def method_steps
-    @product.method_steps
+    @ingredients = builder.product.ingredients
+    @method_steps = builder.product.method_steps
   end
 end

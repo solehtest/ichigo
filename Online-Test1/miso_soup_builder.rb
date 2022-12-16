@@ -1,18 +1,30 @@
 require_relative 'miso_soup'
 
 class MisoSoupBuilder
-  # set product as pancake
+  attr_reader :product
+
+  # set product as miso soup
   def initialize
     @product = MisoSoup.new
   end
 
-  # get all ingredients
-  def ingredients
-    [ @product.ingredient_two, @product.ingredient_one ]
+  # set ingredient 1
+  def ingredient_one
+    @product.add_ingredient('Tofu')
   end
 
-  # get dish preparation steps
-  def method_steps
-    [ @product.cooking_step_one, @product.cooking_step_two ]
+  # set ingredient 2
+  def ingredient_two
+    @product.add_ingredient('White miso paste')
+  end
+
+  # set step 1
+  def method_step_one
+    @product.add_method_step('Mix miso paste into boiling water')
+  end
+
+  # set step 2
+  def method_step_two
+    @product.add_method_step('Add tofu and serve')
   end
 end
