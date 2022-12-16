@@ -1,10 +1,10 @@
-require_relative 'recipe'
+require_relative '../recipe'
 
 describe Recipe do
   before do
-    Recipe.clear
+    Recipe.clear    
 
-    # Recipe.describe do
+    Recipe.describe do
     #   recipe 'Pancake' do
     #     ingredient 'Store-bought pancake mix'
     #     ingredient 'Water'
@@ -24,7 +24,7 @@ describe Recipe do
     #       step 'Add tofu and serve'
     #     end
     #   end
-    # end
+    end
   end
 
   it 'records the ingredients and method of each recipe' do
