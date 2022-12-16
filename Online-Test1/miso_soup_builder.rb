@@ -9,22 +9,22 @@ class MisoSoupBuilder
   end
 
   # set ingredient 1
-  def ingredient_one
+  def tofu_ingredient
     @product.add_ingredient('Tofu')
   end
 
   # set ingredient 2
-  def ingredient_two
+  def white_miso_paste_ingredient
     @product.add_ingredient('White miso paste')
   end
 
   # set step 1
-  def method_step_one
+  def mix_miso_paste_into_boiling_water_step
     @product.add_method_step('Mix miso paste into boiling water')
   end
 
   # set step 2
-  def method_step_two
+  def add_tofu_and_serve_step
     @product.add_method_step('Add tofu and serve')
   end
 end

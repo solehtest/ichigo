@@ -9,22 +9,22 @@ class InstantNoodleBuilder
   end
 
   # set ingredient 1
-  def ingredient_one
+  def indomie_ingredient
     @product.add_ingredient('Indomie')
   end
 
   # set step 1
-  def method_step_one
+  def heat_the_water_to_a_boil_step
     @product.add_method_step('Heat the water to a boil')
   end
 
   # set step 2
-  def method_step_two
+  def put_noodle_into_boiling_water_step
     @product.add_method_step('Put noodles into boiling water')
   end
 
   # set step 3
-  def method_step_three
+  def add_sessioning_step
     @product.add_method_step('Add seasoning')
   end
 end
