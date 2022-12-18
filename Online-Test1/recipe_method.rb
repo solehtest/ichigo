@@ -8,6 +8,6 @@ class RecipeMethod
 
   # add method step
   def step(value)
-    Recipe.get(@name)[:method_steps] |= @director.add_method_step(value)
+    Recipe.get(@name)[:method_steps] = @director.add_method_step(value)
   end
 end
