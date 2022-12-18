@@ -40,4 +40,8 @@ describe Recipe do
     expect(soup_recipe.ingredients).to eq ['Tofu', 'White miso paste']
     expect(soup_recipe.method_steps).to eq ['Mix miso paste into boiling water', 'Add tofu and serve']
   end
+
+  it 'Unrecognized recipe' do
+    expect { Recipe.for('Burger') }.to raise_error(RuntimeError, 'Unrecognized recipe')
+  end
 end

@@ -24,12 +24,8 @@ class Recipe
       @recipes[name]
     end
 
-    # get the recipe data, then set the ingredient and method step data
+    # get recipe data ( name, ingredient and step method )
     def for(name)
-      recipe = get(name)
-      product = recipe[:director].builder.product
-      recipe[:ingredients] = product.ingredients
-      recipe[:method_steps] = product.method_steps
       new(name)
     end
   end
@@ -39,11 +35,14 @@ class Recipe
     is_set ? set_director : get_recipe_data
   end
 
-  # get the name of the recipe, ingredients and step method 
+  # get name, ingredient and step method of recipe
   def get_recipe_data
+    raise 'Unrecognized recipe' unless @recipe
+
     @name = @recipe[:name]
-    @ingredients = @recipe[:ingredients]
-    @method_steps = @recipe[:method_steps]
+    product = @recipe[:director].builder.product
+    @ingredients = product.ingredients
+    @method_steps = product.method_steps
   end
 
   # choose which recipe to make
