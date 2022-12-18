@@ -11,7 +11,7 @@ class Recipe
   end
 
   # set recipe builder
-  def set(name)
+  def initialize(name)
     case name
     when 'Pancake'
       builder = PancakeBuilder.new
