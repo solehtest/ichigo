@@ -4,6 +4,8 @@ require_relative 'miso_soup_builder'
 require_relative 'recipe_method'
 
 class Recipe
+  attr_reader :name, :ingredients, :method_steps
+
   class << self
     def clear
       @recipes = nil
@@ -24,43 +26,41 @@ class Recipe
     end
   end
 
-  # set recipe builder
   def initialize(name, is_set=false)
-    @name = name
-    if is_set
-      case @name
-      when 'Pancake'
-        builder = PancakeBuilder.new
-      when 'Miso Soup'
-        builder = MisoSoupBuilder.new
-      else
-        raise 'Unrecognized recipe'
-      end
+    @recipe_name = name
+    is_set ? set_recipe : get_recipe
+  end
 
-      @director = Director.new(builder)
+  # set recipe builder
+  def set_recipe
+    case @recipe_name
+    when 'Pancake'
+      builder = PancakeBuilder.new
+    when 'Miso Soup'
+      builder = MisoSoupBuilder.new
+    else
+      raise 'Unrecognized recipe'
     end
+
+    @director = Director.new(builder)
   end
 
-  def name
-    Recipe.get(@name)[:name]
-  end
-
-  def ingredients
-    Recipe.get(@name)[:ingredients]
-  end
-
-  def method_steps
-    Recipe.get(@name)[:method_steps]
+  # get data recipe by name
+  def get_recipe
+    recipe = Recipe.get(@recipe_name)
+    @name = recipe[:name]
+    @ingredients = recipe[:ingredients]
+    @method_steps = recipe[:method_steps]
   end
 
   # adding ingredients
   def ingredient(value)
-    Recipe.get(@name)[:ingredients] |= @director.add_ingredient(value)
+    Recipe.get(@recipe_name)[:ingredients] |= @director.add_ingredient(value)
   end
 
   # adding steps through the block code
   def method(&block)
-    obj = RecipeMethod.new(@name, @director)
+    obj = RecipeMethod.new(@recipe_name, @director)
     obj.instance_eval(&block)
     obj
   end
