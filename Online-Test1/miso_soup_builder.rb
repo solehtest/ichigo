@@ -1,30 +1,30 @@
 require_relative 'miso_soup'
+require_relative 'helpers/validator_helper'
 
 class MisoSoupBuilder
+  include ValidatorHelper
+
   attr_reader :product
+
+  INGREDIENTS = ['Tofu', 'White miso paste'].freeze
+  METHOD_STEPS = ['Mix miso paste into boiling water', 'Add tofu and serve'].freeze
 
   # set product as miso soup
   def initialize
     @product = MisoSoup.new
   end
 
-  # set ingredient 1
-  def tofu
-    @product.add_ingredient('Tofu')
+  # add ingredient
+  def add_ingredient(value)
+    invalid_element?(INGREDIENTS, value, 'ingredient')
+    
+    @product.add_ingredient(value)
   end
 
-  # set ingredient 2
-  def white_miso_paste
-    @product.add_ingredient('White miso paste')
-  end
+  # add method step
+  def add_method_step(value)
+    invalid_element?(METHOD_STEPS, value, 'method step')
 
-  # set step 1
-  def mix_miso_paste_into_boiling_water
-    @product.add_method_step('Mix miso paste into boiling water')
-  end
-
-  # set step 2
-  def add_tofu_and_serve
-    @product.add_method_step('Add tofu and serve')
+    @product.add_method_step(value)
   end
 end

@@ -1,30 +1,30 @@
 require_relative 'pancake'
+require_relative 'helpers/validator_helper'
 
 class PancakeBuilder
+  include ValidatorHelper
+
   attr_reader :product
+
+  INGREDIENTS = ['Store-bought pancake mix', 'Water'].freeze
+  METHOD_STEPS = ['Mix the ingredients', 'Cook them in a pan'].freeze
 
   # set product as pancake
   def initialize
     @product = Pancake.new
   end
 
-  # set ingredient 1
-  def store_bought_pancake_mix
-    @product.add_ingredient('Store-bought pancake mix')
+  # add ingredient
+  def add_ingredient(value)
+    invalid_element?(INGREDIENTS, value, 'ingredient')
+    
+    @product.add_ingredient(value)
   end
 
-  # set ingredient 2
-  def water
-    @product.add_ingredient('Water')
-  end
+  # add method step
+  def add_method_step(value)
+    invalid_element?(METHOD_STEPS, value, 'method step')
 
-  # set step 1
-  def mix_the_ingredient
-    @product.add_method_step('Mix the ingredients')
-  end
-
-  # set step 2
-  def cook_then_in_a_pan
-    @product.add_method_step('Cook them in a pan')
+    @product.add_method_step(value)
   end
 end

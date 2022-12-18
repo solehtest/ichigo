@@ -1,30 +1,32 @@
 require_relative '../recipe'
 
+require 'pry'
+
 describe Recipe do
   before do
     Recipe.clear    
 
-    # Recipe.describe do
-    #   recipe 'Pancake' do
-    #     ingredient 'Store-bought pancake mix'
-    #     ingredient 'Water'
+    Recipe.describe do
+      recipe 'Pancake' do
+        ingredient 'Store-bought pancake mix'
+        ingredient 'Water'
 
-    #     method do
-    #       step 'Mix the ingredients'
-    #       step 'Cook them in a pan'
-    #     end
-    #   end
+        method do
+          step 'Mix the ingredients'
+          step 'Cook them in a pan'
+        end
+      end
 
-    #   recipe 'Miso Soup' do
-    #     ingredient 'Tofu'
-    #     ingredient 'White miso paste'
+      recipe 'Miso Soup' do
+        ingredient 'Tofu'
+        ingredient 'White miso paste'
 
-    #     method do
-    #       step 'Mix miso paste into boiling water'
-    #       step 'Add tofu and serve'
-    #     end
-    #   end
-    # end
+        method do
+          step 'Mix miso paste into boiling water'
+          step 'Add tofu and serve'
+        end
+      end
+    end
   end
 
   it 'records the ingredients and method of each recipe' do

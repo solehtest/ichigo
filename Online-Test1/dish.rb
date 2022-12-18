@@ -6,13 +6,13 @@ class Dish
     @method_steps = []
   end
 
-  # add new ingredient
-  def add_ingredient(ingredient)
-    @ingredients |= [ ingredient ]
+  # add ingredient
+  def add_ingredient(value)
+    @ingredients |= [ value ]
   end
 
-  # add new method step
-  def add_method_step(method_step)
-    @method_steps |= [ method_step ]
+  # add method step
+  def add_method_step(value)
+    @method_steps |= [ value ]
   end
 end
