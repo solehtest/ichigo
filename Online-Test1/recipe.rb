@@ -7,35 +7,47 @@ class Recipe
   attr_reader :name, :ingredients, :method_steps
 
   class << self
+    # delete all recipes
     def clear
       @recipes = nil
     end
 
-    # make a recipe based on food name
+    # save recipe
     def set(name)
       @recipes ||= {}
-      @recipes[name] = { name: name, ingredients: [], method_steps: [] }
+      @recipes[name] = { name: name }
       new(name, true)
     end
 
-    # get data on ingredients and how to make from a recipe
+    # get recipe data
     def get(name)
       @recipes[name]
     end
 
-    # get data name, ingredient and method step from a recipe 
+    # get the recipe data, then set the ingredient and method step data
     def for(name)
+      recipe = get(name)
+      product = recipe[:director].builder.product
+      recipe[:ingredients] = product.ingredients
+      recipe[:method_steps] = product.method_steps
       new(name)
     end
   end
 
   def initialize(name, is_set=false)
     @recipe = Recipe.get(name)
-    is_set ? set_recipe : get_recipe
+    is_set ? set_director : get_recipe_data
   end
 
-  # set recipe builder
-  def set_recipe
+  # get the name of the recipe, ingredients and step method 
+  def get_recipe_data
+    @name = @recipe[:name]
+    @ingredients = @recipe[:ingredients]
+    @method_steps = @recipe[:method_steps]
+  end
+
+  # choose which recipe to make
+  def set_director
     case @recipe[:name]
     when 'Pancake'
       builder = PancakeBuilder.new
@@ -45,24 +57,17 @@ class Recipe
       raise 'Unrecognized recipe'
     end
 
-    @director = Director.new(builder)
+    @recipe[:director] = Director.new(builder)
   end
 
-  # get data recipe by food name
-  def get_recipe
-    @name = @recipe[:name]
-    @ingredients = @recipe[:ingredients]
-    @method_steps = @recipe[:method_steps]
-  end
-
-  # adding ingredients
+  # choose ingredient
   def ingredient(value)
-    @recipe[:ingredients] = @director.add_ingredient(value)
+    @recipe[:director].add_ingredient(value)
   end
 
-  # adding steps through the block code
+  # choose method step
   def method(&block)
-    obj = RecipeMethod.new(@recipe[:name], @director)
+    obj = RecipeMethod.new(@recipe[:director])
     obj.instance_eval(&block)
     obj
   end
