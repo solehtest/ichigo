@@ -36,3 +36,59 @@
     transform: rotate(360deg);
   }
 }
+
+.item1 { 
+  grid-area: one; 
+  background-color: royalblue;
+}
+.item2 { 
+  grid-area: two; 
+  background-color: crimson;
+}
+.item3 { 
+  grid-area: three;
+  background-color: peru; 
+}
+.item4 { 
+  grid-area: four; 
+  background-color: indianred;
+}
+.item5 { 
+  grid-area: five; 
+  background-color: purple;
+}
+.item6 { 
+  grid-area: six; 
+  background-color: palegreen;
+}
+.item7 { 
+  grid-area: seven; 
+  background-color: teal;
+}
+.item8 { 
+  grid-area: eight; 
+  background-color: mediumslateblue;
+}
+.item9 { 
+  grid-area: nine; 
+  background-color: darkslategrey;
+}
+
+.grid-container {
+  color: white;
+  display: grid;
+  grid-template-areas:
+    'one one two two two two'
+    'one one three three four four'
+    'five seven seven seven seven eight'
+    'six seven seven seven seven nine';
+  gap: 10px;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
