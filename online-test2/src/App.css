@@ -40,10 +40,10 @@
   color: white;
   display: grid;
   grid-template-areas:
-    'one one two two two two'
-    'one one three three four four'
-    'five seven seven seven seven eight'
-    'six seven seven seven seven nine';
+    'one one one one two two two two'
+    'one one one one three three four four'
+    'five seven seven seven seven seven seven eight'
+    'six seven seven seven seven seven seven nine';
   gap: 10px;
   background-color: whitesmoke;
   padding: 10px;
