@@ -9,12 +9,11 @@ class Recipe
   class << self
     # delete all recipes
     def clear
-      @recipes = nil
+      @recipes = {}
     end
 
     # save recipe
     def set(name)
-      @recipes ||= {}
       @recipes[name] = { name: name }
       new(name, true)
     end
